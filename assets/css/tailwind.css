@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Outfit:wght@100..900&display=swap");
+@tailwind base;
+@layer base {
+  h1 {
+    @apply text-6xl font-semibold font-outfit text-slate-100;
+  }
+  h6 {
+    @apply font-bold font-outfit text-slate-100;
+  }
+  p {
+    @apply font-inter text-slate-300;
+  }
+  mark {
+    @apply text-inherit;
+  }
+  .bg-glass {
+    @apply bg-black bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10;
+  }
+  .btn {
+    @apply px-4 py-2 rounded-full border border-slate-100 text-slate-100 hover:bg-rose-400 hover:border-rose-400 duration-200;
+  }
+}
+
+@tailwind components;
+@tailwind utilities;
