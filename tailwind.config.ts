@@ -18,6 +18,7 @@ export default <Partial<Config>> {
       },
       boxShadow: {
         glow: '0px 0px 16px 4px rgba(255,255,255,0.2)',
+        'b-glow': '0px 8px 16px 4px rgba(255,255,255,0.2)',
       },
     }
   },
