@@ -130,7 +130,20 @@ useHead({
           <TabOC v-if="tab === 4" />
         </div>
       </div>
-      <FullImg v-if="path" />
+      <Transition name="fade">
+        <FullImg v-if="path" />
+      </Transition>
     </div>
   </div>
 </template>
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
