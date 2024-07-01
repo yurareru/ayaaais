@@ -14,6 +14,6 @@
 
 <script lang="ts">
 export default {
-  name: "SimpleIconsGmail",
-};
+  name: 'SimpleIconsGmail',
+}
 </script>

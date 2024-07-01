@@ -1,13 +1,13 @@
 <script setup lang="ts">
-const error: any = useError();
-const text = ref("Redirecting");
+const error: any = useError()
+const text = ref('Redirecting')
 if ((error.statusCode = 404)) {
   setInterval(() => {
-    text.value += ".";
-  }, 2e2);
+    text.value += '.'
+  }, 2e2)
   setTimeout(() => {
-    useRouter().push("/");
-  }, 1e3);
+    useRouter().push('/')
+  }, 1e3)
 }
 </script>
 <template>

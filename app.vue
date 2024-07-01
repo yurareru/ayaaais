@@ -1,12 +1,17 @@
 <script setup lang="ts">
-const elTab = ref<HTMLElement>();
-const tab = ref(0);
-const setTab = async (i: number) => {
-  tab.value = i;
-  await nextTick();
-  elTab.value?.scrollIntoView({ behavior: "smooth" });
-};
-const scrollToTop = () => scrollTo({ top: 0, behavior: "smooth" });
+const elTab = ref<HTMLElement>()
+const tab = ref(0)
+const setTab = async (n: number) => {
+  tab.value = n
+  await nextTick()
+  elTab.value?.scrollIntoView({ behavior: 'smooth' })
+  document.body.classList.remove('overflow-hidden')
+}
+const scrollToTop = () => scrollTo({ top: 0, behavior: 'smooth' })
+const { path } = storeToRefs(useGeneralStore())
+useHead({
+  title: 'Ayaa AIs',
+})
 </script>
 <template>
   <div>
@@ -21,12 +26,13 @@ const scrollToTop = () => scrollTo({ top: 0, behavior: "smooth" });
     <div>
       <div class="flex justify-center items-center h-screen">
         <div class="bg-glass rounded-3xl p-8 w-96 md:w-[40rem]">
-          <div class="space-y-4 md:space-y-2">
+          <div class="space-y-4 md:space-y-2" v-auto-animate>
             <NuxtImg
               src="/assets/avatar.png"
               format="webp"
               width="144"
               class="border-[5px] border-dashed rounded-full border-slate-100 mx-auto md:mx-0"
+              preload
             />
             <h1 class="text-center md:text-left">Ayaa AIs</h1>
             <h6
@@ -103,19 +109,28 @@ const scrollToTop = () => scrollTo({ top: 0, behavior: "smooth" });
           </div>
         </div>
       </div>
-      <div class="min-h-screen" v-if="tab > 0" ref="elTab">
+      <div
+        class="min-h-screen relative mt-32 md:mt-8"
+        v-if="tab > 0"
+        ref="elTab"
+        v-auto-animate
+      >
         <div
           class="bg-glass shadow-b-glow p-2 text-slate-100 sticky top-0 z-10"
         >
-          <button class="p-2" @click="scrollToTop()">Ayaa</button>
+          <button class="p-2" @click="scrollToTop()">Navbar?</button>
         </div>
         <div
           class="flex justify-center items-center min-h-[calc(100vh-5rem)] my-4"
+          v-auto-animate
         >
           <TabAbout v-if="tab === 1" />
           <TabArtworks v-if="tab === 2" />
+          <TabCommission v-if="tab === 3" />
+          <TabOC v-if="tab === 4" />
         </div>
       </div>
+      <FullImg v-if="path" />
     </div>
   </div>
 </template>

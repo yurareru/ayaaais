@@ -1,8 +1,8 @@
 <script setup lang="ts">
 defineProps<{
-  label: string;
-  value: boolean;
-}>();
+  label: string
+  value: boolean
+}>()
 </script>
 <template>
   <div class="flex duration-200">
@@ -18,7 +18,7 @@ defineProps<{
       "
     >
       <b :class="value ? 'text-lime-900' : 'text-red-900'">{{
-        value ? "Open" : "Closed"
+        value ? 'Open' : 'Closed'
       }}</b>
     </div>
   </div>

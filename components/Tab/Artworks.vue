@@ -1,22 +1,26 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const { data: data2024 } = useFetch(() => `/api/artworks/2024`)
+const { data: data2023, execute } = useFetch(() => `/api/artworks/2023`, {
+  immediate: false,
+})
+const target = ref<HTMLElement | null>(null)
+const isObserverActive = ref(true)
+
+// I think I should use paginator, but JS backend is hell
+useIntersectionObserver(target, ([{ isIntersecting }]) => {
+  if (!isIntersecting || !isObserverActive.value || !data2024.value) return
+  if (data2023.value) isObserverActive.value = false
+  execute()
+})
+</script>
 <template>
   <div>
     <h1 class="text-center underline">Artworks</h1>
     <div>
       <h1 class="text-center text-4xl mt-4">2024</h1>
-      <div
-        class="bg-glass rounded-3xl p-8 w-96 md:w-[40rem] lg:w-[60rem] xl:w-[76rem] 2xl:w-[92rem] mt-4 grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-      >
-        <div class="size-80 overflow-hidden rounded-2xl" v-for="_ in 8">
-          <NuxtImg
-            src="/assets/artworks/2024/image04.jpg"
-            format="webp"
-            width="320"
-            height="320"
-            class="duration-500 hover:scale-105 hover:-rotate-3"
-          />
-        </div>
-      </div>
+      <Artworks :data="data2024" />
+      <h1 class="text-center text-4xl mt-16" ref="target">2023</h1>
+      <Artworks :data="data2023" />
     </div>
   </div>
 </template>
