@@ -1,6 +1,6 @@
 <script lang="ts" setup></script>
 <template>
-  <div>
+  <div class="min-h-screen">
     <h1 class="text-center underline">About</h1>
     <div class="bg-glass rounded-3xl p-8 w-96 md:w-[40rem] mt-4">
       <p>

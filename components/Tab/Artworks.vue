@@ -26,7 +26,7 @@ useIntersectionObserver(target, ([{ isIntersecting }]) => {
 })
 </script>
 <template>
-  <div>
+  <div class="min-h-screen">
     <h1 class="text-center underline">Artworks</h1>
     <div v-auto-animate>
       <div>

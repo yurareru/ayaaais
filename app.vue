@@ -1,16 +1,30 @@
 <script setup lang="ts">
+useHead({
+  title: 'Ayaa AIs',
+})
 const elTab = ref<HTMLElement>()
 const tab = ref(0)
 const setTab = async (n: number) => {
   tab.value = n
   await nextTick()
-  elTab.value?.scrollIntoView({ behavior: 'smooth' })
-  document.body.classList.remove('overflow-hidden')
+  scrollToElTab()
+  showMenu.value = false
 }
 const scrollToTop = () => scrollTo({ top: 0, behavior: 'smooth' })
+const scrollToElTab = () => elTab.value?.scrollIntoView({ behavior: 'smooth' })
 const { path } = storeToRefs(useGeneralStore())
-useHead({
-  title: 'Ayaa AIs',
+
+const navbarHeight = ref(56)
+const showMenu = ref(false)
+watch(showMenu, () => {
+  showMenu.value ? (navbarHeight.value = 200) : (navbarHeight.value = 56)
+})
+const isMediumScreen = useMediaQuery('(min-width: 768px)')
+watch(isMediumScreen, async () => {
+  if (isMediumScreen.value) {
+    await nextTick()
+    showMenu.value = false
+  }
 })
 </script>
 <template>
@@ -24,7 +38,7 @@ useHead({
       class="bg-gradient-to-br from-rose-600 to-violet-400 object-cover h-screen w-screen fixed opacity-50 -z-10"
     />
     <div>
-      <div class="flex justify-center items-center h-screen">
+      <div class="flex justify-center items-center min-h-screen py-8">
         <div class="bg-glass rounded-3xl p-8 w-96 md:w-[40rem]">
           <div class="space-y-4 md:space-y-2" v-auto-animate>
             <NuxtImg
@@ -83,7 +97,7 @@ useHead({
               class="btn"
               :class="tab === 1 ? 'bg-rose-400 border-rose-400' : ''"
             >
-              About Me
+              About
             </button>
             <button
               @click="setTab(2)"
@@ -109,25 +123,73 @@ useHead({
           </div>
         </div>
       </div>
-      <div
-        class="min-h-screen relative mt-32 md:mt-8"
-        v-if="tab > 0"
-        ref="elTab"
-        v-auto-animate
-      >
+      <div class="min-h-screen relative" v-if="tab > 0" ref="elTab">
         <div
-          class="bg-glass shadow-b-glow p-2 text-slate-100 sticky top-0 z-10"
+          class="bg-glass shadow-b-glow p-2 text-slate-100 sticky top-0 z-10 flex items-center justify-between transition-all duration-500 overflow-hidden"
+          :style="`height: ${navbarHeight}px;`"
         >
-          <button class="p-2" @click="scrollToTop()">Navbar?</button>
+          <span class="px-8" v-if="!isMediumScreen" />
+          <button class="p-2" @click="scrollToTop()" v-if="isMediumScreen">
+            Navbar?
+          </button>
+          <TransitionGroup name="fade">
+            <ul
+              v-if="showMenu || isMediumScreen"
+              class="text-center duration-300 md:space-y-0 items-center"
+              :class="showMenu ? 'space-y-2' : 'flex'"
+            >
+              <li
+                class="px-4 py-2 cursor-pointer rounded-full"
+                @click="setTab(1)"
+                :class="tab === 1 ? 'bg-rose-400 border-rose-400' : ''"
+              >
+                About
+              </li>
+              <li
+                class="px-4 py-2 cursor-pointer rounded-full"
+                @click="setTab(2)"
+                :class="tab === 2 ? 'bg-rose-400 border-rose-400' : ''"
+              >
+                Artworks
+              </li>
+              <li
+                class="px-4 py-2 cursor-pointer rounded-full"
+                @click="setTab(3)"
+                :class="tab === 3 ? 'bg-rose-400 border-rose-400' : ''"
+              >
+                Commission
+              </li>
+              <li
+                class="px-4 py-2 cursor-pointer rounded-full"
+                @click="setTab(4)"
+                :class="tab === 4 ? 'bg-rose-400 border-rose-400' : ''"
+              >
+                Original Characters
+              </li>
+            </ul>
+          </TransitionGroup>
+          <div class="md:px-8">
+            <IconMenu
+              @click="showMenu = true"
+              v-if="!showMenu && !isMediumScreen"
+              class="text-4xl text-slate-100 hover:text-slate-800 hover:bg-slate-100 p-2 rounded-full duration-200"
+            />
+            <IconClose
+              @click="showMenu = !showMenu"
+              v-else-if="showMenu && !isMediumScreen"
+              class="text-4xl text-slate-100 hover:text-slate-800 hover:bg-slate-100 p-2 rounded-full duration-200"
+            />
+          </div>
         </div>
         <div
-          class="flex justify-center items-center min-h-[calc(100vh-5rem)] my-4"
-          v-auto-animate
+          class="flex items-center min-h-[calc(100vh-5rem)] my-4 flex-col overflow-x-hidden"
         >
-          <TabAbout v-if="tab === 1" />
-          <TabArtworks v-if="tab === 2" />
-          <TabCommission v-if="tab === 3" />
-          <TabOC v-if="tab === 4" />
+          <Transition name="slide" appear mode="out-in">
+            <TabAbout v-if="tab === 1" />
+            <TabArtworks v-else-if="tab === 2" />
+            <TabCommission v-else-if="tab === 3" />
+            <TabOC v-else-if="tab === 4" />
+          </Transition>
         </div>
       </div>
       <Transition name="fade">
@@ -142,8 +204,22 @@ useHead({
   transition: opacity 0.5s ease;
 }
 
-.fade-enter-from,
+.fade-enter-from {
+  opacity: 0;
+}
 .fade-leave-to {
   opacity: 0;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.5s ease-in 0.1s;
+}
+
+.slide-enter-from {
+  transform: translateX(100vw);
+}
+.slide-leave-to {
+  transform: translateX(-100vw);
 }
 </style>
