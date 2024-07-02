@@ -1,4 +1,5 @@
 <script setup lang="ts">
+//@ts-ignore
 defineProps<{
   label: string
   value: boolean

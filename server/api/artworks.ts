@@ -3,14 +3,18 @@ import fs from 'node:fs'
 export default defineEventHandler(async (event) => {
   const page = parseInt(getQuery<{ page: string }>(event).page || '1')
   const limit = parseInt(getQuery<{ limit: string }>(event).limit || '4')
-  const year = getRouterParam(event, 'year')
 
   const startIndex = (page - 1) * limit
   const endIndex = page * limit
 
   const files = fs
-    .readdirSync(`./public/assets/artworks/${year}`)
-    .map((file) => `/assets/artworks/${year}/${file}`)
+    .readdirSync(`./public/assets/artworks/2024`)
+    .map((file) => `/assets/artworks/2024/${file}`)
+    .concat(
+      ...fs
+        .readdirSync(`./public/assets/artworks/2023`)
+        .map((file) => `/assets/artworks/2023/${file}`)
+    )
 
   const res = {
     total: files.length,

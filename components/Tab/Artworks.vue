@@ -1,35 +1,28 @@
 <script lang="ts" setup>
-const { year, page, limit, artworks2024, artworks2023 } = storeToRefs(
-  useGeneralStore()
-)
+const { page, limit, artworks } = storeToRefs(useGeneralStore())
 
 const fetchArtworks = () => {
-  $fetch(
-    `/api/artworks/${year.value}?page=${page.value}&limit=${limit.value}`
-  ).then((data: any) => {
-    if (year.value === 2023) {
-      artworks2023.value.push(...data.data)
-      if (!data.nextPage) return (isObserverActive.value = false)
+  $fetch(`/api/artworks?page=${page.value}&limit=${limit.value}`).then(
+    (data: any) => {
+      data.data.forEach((path: string) => {
+        if (path.includes('/2024/')) artworks.value[2024].push(path)
+        if (path.includes('/2023/')) artworks.value[2023].push(path)
+        if (page.value > data.lastPage) isObserverActive.value = false
+      })
     }
-    if (year.value === 2024) {
-      artworks2024.value.push(...data.data)
-      if (!data.nextPage) {
-        year.value = 2023
-        page.value = 0
-      }
-    }
-    page.value++
-  })
+  )
 }
+fetchArtworks()
+page.value++
 
 const target = ref<HTMLElement | null>(null)
 const isObserverActive = ref(true)
-fetchArtworks()
 
+//@ts-ignore
 useIntersectionObserver(target, ([{ isIntersecting }]) => {
   if (!isIntersecting || !isObserverActive.value) return
-  console.log(isIntersecting)
   fetchArtworks()
+  page.value++
 })
 </script>
 <template>
@@ -38,11 +31,11 @@ useIntersectionObserver(target, ([{ isIntersecting }]) => {
     <div v-auto-animate>
       <div>
         <h1 class="text-center text-4xl mt-4">2024</h1>
-        <Artworks :data="artworks2024" />
+        <Artworks :data="artworks[2024]" />
       </div>
-      <div v-if="artworks2023.length > 0">
+      <div v-if="artworks[2023].length > 0">
         <h1 class="text-center text-4xl mt-16">2023</h1>
-        <Artworks :data="artworks2023" />
+        <Artworks :data="artworks[2023]" />
       </div>
       <div class="border -translate-y-16 invisible" ref="target" />
     </div>

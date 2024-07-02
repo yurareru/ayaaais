@@ -6,19 +6,17 @@ export const useGeneralStore = defineStore('general', () => {
     path.value = data
   }
 
-  const year = ref(2024)
   const page = ref<number>(1)
   const limit = ref<number>(4)
-  const artworks2024 = ref<string[]>([])
-  const artworks2023 = ref<string[]>([])
-
+  const artworks = ref<{ 2024: string[]; 2023: string[] }>({
+    2024: [],
+    2023: [],
+  })
   return {
     path,
     setPath,
-    year,
     page,
     limit,
-    artworks2024,
-    artworks2023,
+    artworks,
   }
 })
