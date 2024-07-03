@@ -9,6 +9,8 @@ const tasks = {
   'commission ingfo tab': false,
   'original characters tab': false,
   'sort artworks': false,
+  'parallax?': false,
+  'multidirectional tab sliding animation?': false,
 }
 </script>
 <template>

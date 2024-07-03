@@ -3,10 +3,12 @@ const { path } = storeToRefs(useGeneralStore())
 const { setPath } = useGeneralStore()
 const img = useImage()
 const background = ref()
-useEventListener(background, 'click', (e: Event) => {
-  setPath('')
-  console.log(e)
-})
+useEventListener(background, 'click', (e: Event) => setPath(''))
+const preventScroll = (e: Event) => {
+  e.preventDefault()
+}
+useEventListener(document.body, 'wheel', preventScroll, { passive: false })
+useEventListener(document.body, 'touchmove', preventScroll, { passive: false })
 </script>
 <template>
   <div
@@ -17,8 +19,9 @@ useEventListener(background, 'click', (e: Event) => {
     <NuxtImg
       :src="path"
       format="webp"
-      class="object-contain p-4 w-full h-full"
-      :placeholder="img(`/${path}`, { w: 128, f: 'webp', blur: 2, q: 50 })"
+      class="object-contain p-4 w-full h-full text-white flex justify-center items-center"
+      :placeholder="img(`/${path}`, { w: 20, f: 'webp', blur: 2, q: 50 })"
+      alt="loading"
     />
   </div>
 </template>

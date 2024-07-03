@@ -124,18 +124,19 @@ watch(isMediumScreen, async () => {
         </div>
       </div>
       <div class="min-h-screen relative" v-if="tab > 0" ref="elTab">
-        <div
+        <nav
           class="bg-glass shadow-b-glow p-2 text-slate-100 sticky top-0 z-10 flex items-center justify-between transition-all duration-500 overflow-hidden"
           :style="`height: ${navbarHeight}px;`"
         >
-          <span class="px-8" v-if="!isMediumScreen" />
-          <button class="p-2" @click="scrollToTop()" v-if="isMediumScreen">
-            Navbar?
-          </button>
+          <div>
+            <button class="p-2" @click="scrollToTop()" v-if="isMediumScreen">
+              Navbar?
+            </button>
+          </div>
           <TransitionGroup name="fade">
             <ul
               v-if="showMenu || isMediumScreen"
-              class="text-center duration-300 md:space-y-0 items-center"
+              class="text-center duration-300 md:space-y-0 items-center absolute left-1/2 -translate-x-1/2 w-max"
               :class="showMenu ? 'space-y-2' : 'flex'"
             >
               <li
@@ -168,7 +169,7 @@ watch(isMediumScreen, async () => {
               </li>
             </ul>
           </TransitionGroup>
-          <div class="md:px-8">
+          <div>
             <IconMenu
               @click="showMenu = true"
               v-if="!showMenu && !isMediumScreen"
@@ -180,7 +181,7 @@ watch(isMediumScreen, async () => {
               class="text-4xl text-slate-100 hover:text-slate-800 hover:bg-slate-100 p-2 rounded-full duration-200"
             />
           </div>
-        </div>
+        </nav>
         <div
           class="flex items-center min-h-[calc(100vh-5rem)] my-4 flex-col overflow-x-hidden"
         >
