@@ -20,12 +20,6 @@ export default <Partial<Config>>{
         glow: '0px 0px 16px 4px rgba(255,255,255,0.2)',
         'b-glow': '0px 8px 16px 4px rgba(255,255,255,0.2)',
       },
-      content: {
-        BRI: "url('/assets/BRI.png')",
-        DANA: "url('/assets/DANA.png')",
-        shopeePay: "url('/assets/ShopeePay.png')",
-        goPay: "url('/assets/GoPay.png')",
-      },
     },
   },
   plugins: [],

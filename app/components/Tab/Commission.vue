@@ -67,7 +67,7 @@
             <li>Furry</li>
             <li>NSFW</li>
             <li>LGBT</li>
-            <li>Lansia</li>
+            <li>Old People</li>
             <li>Mecha</li>
           </ul>
         </div>
@@ -135,7 +135,7 @@
                   alt="BRI Logo"
                   class="mr-2 w-6 h-6"
                 />
-                <span>BRI</span>
+                <span class="text-[#00529c] font-bold">BRI</span>
               </li>
               <li class="flex items-center">
                 <NuxtImg
@@ -143,7 +143,7 @@
                   alt="DANA Logo"
                   class="mr-2 w-6 h-6"
                 />
-                <span>DANA</span>
+                <span class="text-[#118ee9] font-bold">DANA</span>
               </li>
               <li class="flex items-center">
                 <NuxtImg
@@ -151,7 +151,7 @@
                   alt="ShopeePay Logo"
                   class="mr-2 w-6 h-6"
                 />
-                <span>ShopeePay</span>
+                <span class="text-[#ee4d2d] font-bold">ShopeePay</span>
               </li>
               <li class="flex items-center">
                 <NuxtImg
@@ -159,7 +159,7 @@
                   alt="GoPay Logo"
                   class="mr-2 w-6 h-6"
                 />
-                <span>GoPay</span>
+                <span class="text-[#00aed6] font-bold">GoPay</span>
               </li>
             </ul>
           </li>

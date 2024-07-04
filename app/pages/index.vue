@@ -2,16 +2,19 @@
 useHead({
   title: 'Ayaa AIs',
 })
-const elTab = ref<HTMLElement>()
-const tab = ref(0)
+const tab = ref(2)
+const prevTab = ref(-1)
 const setTab = async (n: number) => {
+  prevTab.value = tab.value
   tab.value = n
   await nextTick()
   scrollToElTab()
   showMenu.value = false
 }
-const scrollToTop = () => scrollTo({ top: 0, behavior: 'smooth' })
-const scrollToElTab = () => elTab.value?.scrollIntoView({ behavior: 'smooth' })
+const body = ref(null)
+const scrollToTop = () => (y.value = 0)
+const scrollToElTab = () => (y.value = height.value)
+
 const { path } = storeToRefs(useGeneralStore())
 
 const navbarHeight = ref(56)
@@ -26,6 +29,8 @@ watch(isMediumScreen, async () => {
     showMenu.value = false
   }
 })
+const { height } = useWindowSize()
+const { y } = useScroll(body, { behavior: 'smooth' })
 </script>
 <template>
   <div>
@@ -37,8 +42,10 @@ watch(isMediumScreen, async () => {
     <div
       class="bg-gradient-to-br from-rose-600 to-violet-400 object-cover h-screen w-screen fixed opacity-50 -z-10"
     />
-    <div>
-      <div class="flex justify-center items-center min-h-screen py-8">
+    <div class="overflow-y-scroll h-screen snap-y snap-mandatory" ref="body">
+      <div
+        class="flex justify-center items-center min-h-screen py-8 snap-start"
+      >
         <div class="bg-glass rounded-3xl p-8 w-96 md:w-[40rem]">
           <div class="space-y-4 md:space-y-2" v-auto-animate>
             <NuxtImg
@@ -93,46 +100,25 @@ watch(isMediumScreen, async () => {
             class="flex flex-col space-y-4 md:space-y-0 md:flex-row md:justify-center space-x-2"
           >
             <button
-              @click="setTab(1)"
-              class="btn"
-              :class="tab === 1 ? 'bg-rose-400 border-rose-400' : ''"
-            >
-              About
-            </button>
-            <button
               @click="setTab(2)"
               class="btn"
               :class="tab === 2 ? 'bg-rose-400 border-rose-400' : ''"
             >
-              Artworks
-            </button>
-            <button
-              @click="setTab(3)"
-              class="btn"
-              :class="tab === 3 ? 'bg-rose-400 border-rose-400' : ''"
-            >
-              Commission
-            </button>
-            <button
-              @click="setTab(4)"
-              class="btn"
-              :class="tab === 4 ? 'bg-rose-400 border-rose-400' : ''"
-            >
-              Original Characters
+              Commission Info
             </button>
           </div>
         </div>
       </div>
-      <div class="min-h-screen relative" v-if="tab > 0" ref="elTab">
+      <div
+        class="min-h-screen relative snap-start pb-4"
+        v-if="tab > 0"
+        ref="elTab"
+      >
         <nav
           class="bg-glass shadow-b-glow p-2 text-slate-100 sticky top-0 z-10 flex items-center justify-between transition-all duration-500 overflow-hidden"
           :style="`height: ${navbarHeight}px;`"
         >
-          <div>
-            <button class="p-2" @click="scrollToTop()" v-if="isMediumScreen">
-              Navbar?
-            </button>
-          </div>
+          <div />
           <TransitionGroup name="fade">
             <ul
               v-if="showMenu || isMediumScreen"
@@ -151,22 +137,23 @@ watch(isMediumScreen, async () => {
                 @click="setTab(2)"
                 :class="tab === 2 ? 'bg-rose-400 border-rose-400' : ''"
               >
-                Artworks
+                Commission
               </li>
               <li
                 class="px-4 py-2 cursor-pointer rounded-full"
                 @click="setTab(3)"
                 :class="tab === 3 ? 'bg-rose-400 border-rose-400' : ''"
               >
-                Commission
+                Artworks
               </li>
-              <li
+
+              <!-- <li
                 class="px-4 py-2 cursor-pointer rounded-full"
                 @click="setTab(4)"
                 :class="tab === 4 ? 'bg-rose-400 border-rose-400' : ''"
               >
                 Original Characters
-              </li>
+              </li> -->
             </ul>
           </TransitionGroup>
           <div>
@@ -183,18 +170,37 @@ watch(isMediumScreen, async () => {
           </div>
         </nav>
         <div
-          class="flex items-center min-h-[calc(100vh-5rem)] my-4 flex-col overflow-x-hidden"
+          class="flex items-center min-h-[calc(100vh-5rem)] my-4 flex-col overflow-hidden"
         >
-          <Transition name="slide" appear mode="out-in">
+          <Transition
+            :name="
+              prevTab == -1 || !isMediumScreen
+                ? 'slide-up'
+                : tab > prevTab
+                ? 'slide-left'
+                : 'slide-right'
+            "
+            appear
+            mode="out-in"
+          >
             <TabAbout v-if="tab === 1" />
-            <TabArtworks v-else-if="tab === 2" />
-            <TabCommission v-else-if="tab === 3" />
-            <TabOC v-else-if="tab === 4" />
+            <TabCommission v-else-if="tab === 2" />
+            <TabArtworks v-else-if="tab === 3" />
+            <!-- <TabOC v-else-if="tab === 4" /> -->
           </Transition>
         </div>
       </div>
       <Transition name="fade">
         <FullImg v-if="path" />
+      </Transition>
+      <Transition name="slide" appear>
+        <div
+          class="fixed bottom-4 right-4 p-4 text-4xl z-50 rounded-full text-slate-100 cursor-pointer bg-glass"
+          @click="scrollToTop()"
+          v-if="y > height / 4"
+        >
+          <IconUp />
+        </div>
       </Transition>
     </div>
   </div>
@@ -204,7 +210,6 @@ watch(isMediumScreen, async () => {
 .fade-leave-active {
   transition: opacity 0.5s ease;
 }
-
 .fade-enter-from {
   opacity: 0;
 }
@@ -212,15 +217,43 @@ watch(isMediumScreen, async () => {
   opacity: 0;
 }
 
-.slide-enter-active,
-.slide-leave-active {
+.slide-left-enter-active,
+.slide-left-leave-active {
   transition: transform 0.5s ease-in 0.1s;
 }
-
-.slide-enter-from {
+.slide-left-enter-from {
   transform: translateX(100vw);
 }
-.slide-leave-to {
+.slide-left-leave-to {
   transform: translateX(-100vw);
+}
+
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: transform 0.5s ease-in 0.1s;
+}
+.slide-right-enter-from {
+  transform: translateX(-100vw);
+}
+.slide-right-leave-to {
+  transform: translateX(100vw);
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.5s ease-in 0.1s;
+}
+.slide-up-enter-from,
+.slide-up-leave-to {
+  transform: translateY(100vh);
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease;
+}
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateY(200%);
 }
 </style>

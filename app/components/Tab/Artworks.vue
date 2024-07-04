@@ -4,14 +4,20 @@ const { page, limit, artworks } = storeToRefs(useGeneralStore())
 const fetchArtworks = () => {
   $fetch(`/api/artworks?page=${page.value}&limit=${limit.value}`).then(
     (data: any) => {
-      data.data.forEach((path: string) => {
-        if (path.includes('/2024/')) artworks.value[2024].push(path)
-        if (path.includes('/2023/')) artworks.value[2023].push(path)
+      data.data.forEach((name: string) => {
+        if (name.includes('2024_'))
+          artworks.value[2024].push({ path: `/assets/artworks/${name}`, name })
+        if (name.includes('2023_'))
+          artworks.value[2023].push({ path: `/assets/artworks/${name}`, name })
+
         if (page.value > data.lastPage) isObserverActive.value = false
       })
     }
   )
 }
+
+fetchArtworks()
+page.value++
 fetchArtworks()
 page.value++
 
@@ -28,7 +34,7 @@ useIntersectionObserver(target, ([{ isIntersecting }]) => {
 <template>
   <div class="min-h-screen">
     <h1 class="text-center underline">Artworks</h1>
-    <div v-auto-animate>
+    <div>
       <div>
         <h1 class="text-center text-4xl mt-4">2024</h1>
         <Artworks :data="artworks[2024]" />
