@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
 
   const startIndex = (page - 1) * limit
   const endIndex = page * limit
-  const folderPath = path.join(process.cwd(), 'public', 'assets', 'artworks')
+  const folderPath = path.resolve(process.cwd(), 'public', 'assets', 'artworks')
   try {
     const files = fs.readdirSync(folderPath).reverse()
     const res = {

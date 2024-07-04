@@ -155,7 +155,7 @@
               </li>
               <li class="flex items-center">
                 <NuxtImg
-                  src="/assets/GoPay.png"
+                  src="/assets/gopay.png"
                   alt="GoPay Logo"
                   class="mr-2 w-6 h-6"
                 />
