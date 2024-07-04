@@ -1,4 +1,6 @@
 import fs from 'node:fs'
+import path from 'node:path'
+import { join } from 'path'
 
 export default defineEventHandler(async (event) => {
   const page = parseInt(getQuery<{ page: string }>(event).page || '1')
@@ -6,8 +8,8 @@ export default defineEventHandler(async (event) => {
 
   const startIndex = (page - 1) * limit
   const endIndex = page * limit
-
-  const files = fs.readdirSync(`./public/assets/artworks/`).reverse()
+  const folderPath = join(process.cwd(), 'public/assets/artworks')
+  const files = await fs.readdirSync(folderPath).reverse()
 
   const res = {
     total: files.length,
