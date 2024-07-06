@@ -25,11 +25,10 @@ setTimeout(() => {
           :src="path"
           format="webp"
           width="320px"
-          height="320px"
-          class="duration-500 hover:scale-105 hover:-rotate-3 flex-grow text-white flex justify-center items-center"
+          class="duration-500 hover:scale-105 hover:-rotate-3 flex-grow text-white flex justify-center items-center w-full h-full object-cover"
           :alt="`loading ${name}`"
           :placeholder="
-            img(`/${path}`, { w: 20, h: 20, f: 'webp', blur: 2, q: 50 })
+            img(`/${path}`, { w: 32, h: 32, f: 'webp', blur: 2, q: 50 })
           "
         />
       </div>

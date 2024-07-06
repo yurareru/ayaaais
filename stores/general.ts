@@ -7,7 +7,7 @@ export const useGeneralStore = defineStore('general', () => {
   }
 
   const page = ref<number>(1)
-  const limit = ref<number>(4)
+  const limit = ref<number>(8)
   const artworks = ref<{
     2024: { path: string; name: string }[]
     2023: { path: string; name: string }[]

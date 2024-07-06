@@ -18,8 +18,6 @@ const fetchArtworks = () => {
 
 fetchArtworks()
 page.value++
-fetchArtworks()
-page.value++
 
 const target = ref<HTMLElement | null>(null)
 const isObserverActive = ref(true)
