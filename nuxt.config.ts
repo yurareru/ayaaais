@@ -1,12 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  app: {
-    head: {
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/assets/favicon.ico' },
-      ],
-    },
-  },
   devtools: { enabled: true },
   modules: [
     '@nuxtjs/tailwindcss',
@@ -16,8 +9,29 @@ export default defineNuxtConfig({
     '@formkit/auto-animate/nuxt',
   ],
 
+  // runtimeConfig: {
+  //   proxy: 'https://yuuraeru-api.vercel.app/',
+  // },
+
+  routeRules: {
+    '/api/**': {
+      proxy: `https://yuuraeru-api.vercel.app/api/v1/**`,
+    },
+    '/_image/**': {
+      proxy: `https://yuuraeru-api.vercel.app/_image/**`,
+    },
+    '/assets/artworks/**': {
+      proxy: `https://yuuraeru-api.vercel.app/artworks/**`,
+    },
+  },
+
   image: {
     format: ['webp'],
+    domains: ['yuuraeru-api.vercel.app'],
+    alias: {
+      artworks: 'https://yuuraeru-api.vercel.app/artworks',
+      // artworks: '/assets/artworks',
+    },
   },
 
   pinia: {

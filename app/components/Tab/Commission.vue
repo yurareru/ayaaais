@@ -1,4 +1,8 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+useHead({
+  title: 'Commission Information',
+})
+</script>
 <template>
   <div class="min-h-screen">
     <div>
@@ -32,8 +36,7 @@
             hanya setengah saja, misalnya bust up IDR 60.000 namun terkena
             revisi maka setelahnya hanya perlu membayar IDR 30.000, dan jika
             revisinya merubah dari bust up ke half body (selama masih di anggap
-            sebagai revisi besar- besaran) hanya akan dikenakan biaya IDR
-            50.000)
+            sebagai revisi besar-besaran) hanya akan dikenakan biaya IDR 50.000)
           </li>
           <li>
             Kesulitan pada proses menggambar bisa saja memakan waktu yang lebih
@@ -101,7 +104,7 @@
           </tr>
           <tr>
             <td>Commercial purpose</td>
-            <td>3x</td>
+            <td>2x</td>
           </tr>
           <tr>
             <td>Couple</td>
@@ -115,7 +118,7 @@
           >
         </p>
         <ul class="text-slate-300 mt-6 space-y-2 list-disc">
-          <li>Revisi dan Simpel color background tidak akan dikenai biaya.</li>
+          <li>Revisi dan simpel color background tidak akan dikenai biaya.</li>
           <li>Semua sudah termasuk detailing dan fully rendered.</li>
           <li>
             Waktu pengerjaan bervariasi namun rata-rata bisa menghabiskan waktu
@@ -168,4 +171,3 @@
     </div>
   </div>
 </template>
-<style scoped></style>

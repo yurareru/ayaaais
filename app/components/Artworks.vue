@@ -4,8 +4,7 @@ const data = ref()
 const props = defineProps<{
   data: { path: string }
 }>()
-const { setPath } = useGeneralStore()
-const img = useImage()
+const { setName } = useGeneralStore()
 setTimeout(() => {
   data.value = props.data
 }, 500)
@@ -17,19 +16,19 @@ setTimeout(() => {
     <TransitionGroup name="pop" appear mode="out-in">
       <div
         class="size-80 md:size-64 lg:size-64 overflow-hidden rounded-2xl cursor-pointer flex"
-        v-for="({ path, name }, index) in data"
-        :key="`${path}-${index}`"
-        @click="setPath(path)"
+        v-for="(name, index) in data"
+        :key="`${name}-${index}`"
+        @click="setName(name)"
       >
         <NuxtImg
-          :src="path"
+          :src="`/artworks/${name}`"
           format="webp"
           width="320px"
           class="duration-500 hover:scale-105 hover:-rotate-3 flex-grow text-white flex justify-center items-center w-full h-full object-cover"
           :alt="`loading ${name}`"
-          :placeholder="
-            img(`/${path}`, { w: 32, h: 32, f: 'webp', blur: 2, q: 50 })
-          "
+          quality="50"
+          placeholder="/assets/MaterialSymbolsImage.svg"
+          placeholder-class="animate-pulse"
         />
       </div>
     </TransitionGroup>

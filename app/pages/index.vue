@@ -1,7 +1,4 @@
 <script setup lang="ts">
-useHead({
-  title: 'Ayaa AIs',
-})
 const tab = ref(2)
 const prevTab = ref(-1)
 const setTab = async (n: number) => {
@@ -15,7 +12,7 @@ const body = ref(null)
 const scrollToTop = () => (y.value = 0)
 const scrollToElTab = () => (y.value = height.value)
 
-const { path } = storeToRefs(useGeneralStore())
+const { name } = storeToRefs(useGeneralStore())
 
 const navbarHeight = ref(56)
 const showMenu = ref(false)
@@ -42,7 +39,7 @@ const { y } = useScroll(body, { behavior: 'smooth' })
     <div
       class="bg-gradient-to-br from-rose-600 to-violet-400 object-cover h-screen w-screen fixed opacity-50 -z-10"
     />
-    <div class="overflow-y-scroll h-screen snap-y snap-mandatory" ref="body">
+    <div class="overflow-y-scroll h-screen md:snap-y snap-mandatory" ref="body">
       <div
         class="flex justify-center items-center min-h-screen py-8 snap-start"
       >
@@ -191,11 +188,11 @@ const { y } = useScroll(body, { behavior: 'smooth' })
         </div>
       </div>
       <Transition name="fade">
-        <FullImg v-if="path" />
+        <FullImg v-if="name" />
       </Transition>
       <Transition name="slide" appear>
         <div
-          class="fixed bottom-4 right-4 p-4 text-4xl z-50 rounded-full text-slate-100 cursor-pointer bg-glass"
+          class="fixed bottom-4 right-4 p-4 text-4xl z-50 rounded-full text-slate-100 cursor-pointer bg-glass hover:text-rose-400 duration-500"
           @click="scrollToTop()"
           v-if="y > height / 4"
         >

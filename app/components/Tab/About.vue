@@ -1,4 +1,8 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+useHead({
+  title: 'About Me',
+})
+</script>
 <template>
   <div class="min-h-screen">
     <h1 class="text-center underline">About</h1>

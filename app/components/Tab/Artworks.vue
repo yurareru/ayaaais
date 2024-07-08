@@ -1,14 +1,15 @@
 <script lang="ts" setup>
+useHead({
+  title: 'My Artworks',
+})
 const { page, limit, artworks } = storeToRefs(useGeneralStore())
 
 const fetchArtworks = () => {
   $fetch(`/api/artworks?page=${page.value}&limit=${limit.value}`).then(
     (data: any) => {
       data.data.forEach((name: string) => {
-        if (name.includes('2024_'))
-          artworks.value[2024].push({ path: `/assets/artworks/${name}`, name })
-        if (name.includes('2023_'))
-          artworks.value[2023].push({ path: `/assets/artworks/${name}`, name })
+        if (name.includes('2024_')) artworks.value[2024].push(name)
+        if (name.includes('2023_')) artworks.value[2023].push(name)
 
         if (page.value > data.lastPage) isObserverActive.value = false
       })
@@ -22,8 +23,7 @@ page.value++
 const target = ref<HTMLElement | null>(null)
 const isObserverActive = ref(true)
 
-//@ts-ignore
-useIntersectionObserver(target, ([{ isIntersecting }]) => {
+useIntersectionObserver(target, ([{ isIntersecting }]: any) => {
   if (!isIntersecting || !isObserverActive.value) return
   fetchArtworks()
   page.value++
