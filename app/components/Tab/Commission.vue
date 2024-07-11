@@ -2,6 +2,46 @@
 useHead({
   title: 'Commission Information',
 })
+
+const termsAndConditions = [
+  'Saya berhak menolak pesananan jika merasa tidak nyaman dan tidak mampu untuk menerima.',
+  'Pembayaran penuh dilakukan setelah sketsa di setujui oleh klien.',
+  'Harus menyertakan referensi yang jelas.',
+  'Pengembalian hanya bisa dilakukan ketika dalam kondisi saya tidak mampu melanjutkan hasil kerja saya, dan klien hanya akan menerima pengembalian biaya sebesar 50% dari total pembelian namun jika sudah sampai tahap half rendering klien hanya mendapatkan pengembalian sebesar 30%',
+  'Revisi yang merubah total atau sebagian besar hasil kerja akan dikenakan setengah biaya dari harga pembelian (tidak dibayar full hanya setengah saja, misalnya bust up IDR 60.000 namun terkena revisi maka setelahnya hanya perlu membayar IDR 30.000, dan jika revisinya merubah dari bust up ke half body (selama masih di anggap sebagai revisi besar-besaran) hanya akan dikenakan biaya IDR 50.000)',
+  'Kesulitan pada proses menggambar bisa saja memakan waktu yang lebih lama dan akan berpengaruh pada tambahan biaya sebesar 10% dari total pembelian.',
+]
+
+const doList = [
+  'Female',
+  'Original Character',
+  'Fanart',
+  'Detailed Character',
+  'Heavy Gore',
+  'Kemonomimi',
+]
+
+const dontList = ['Male', 'Furry', 'NSFW', 'LGBT', 'Old People', 'Mecha']
+const priceList = {
+  'Bust up': 'IDR 60.000',
+  'Half body': 'IDR 100.000',
+  'Knee up': 'IDR 140.000',
+  'Full body': 'IDR 170.000',
+  'Character sheet*': 'IDR 220.000',
+  Background: 'IDR 15.000 - IDR 100.000',
+  'Commercial purpose': '2x',
+  Couple: '2x',
+}
+const clarificationList = [
+  'Character sheet: Full body (front, back, side), aset tambahan berupa detail karakter dan gratis 1 bust up.',
+]
+
+const noteList = [
+  'Revisi dan simpel color background tidak akan dikenai biaya.',
+  'Semua sudah termasuk detailing dan fully rendered.',
+  'Waktu pengerjaan bervariasi namun rata-rata bisa menghabiskan waktu selama 5 hari - 1 bulan tergantung dari pesanan dan pengerjaannya.',
+  'Hasil akan dikirimkan melalui Google Drive, bisa dalam bentuk JPG atau PNG, 350 DPI, Transparan atau background jika dengan latar belakang.',
+]
 </script>
 <template>
   <div class="min-h-screen">
@@ -10,38 +50,8 @@ useHead({
       <h6 class="text-center font-normal">Please read carefully</h6>
       <div class="bg-glass rounded-3xl p-8 w-96 md:w-[40rem] mt-4">
         <ul class="text-slate-300 list-disc">
-          <li>
-            Saya berhak menolak pesananan jika merasa tidak nyaman dan tidak
-            mampu untuk menerima.
-          </li>
-          <li>
-            Klien diharap untuk bisa selalu fast respon, jika ada hambatan
-            sebisa mungkin memberikan kabar untuk menghindari hal yang tidak
-            diinginkan.
-          </li>
-          <li>
-            Pembayaran penuh dilakukan setelah sketsa di setujui oleh klien.
-          </li>
-          <li>Harus menyertakan referensi yang jelas.</li>
-          <li>
-            Pengembalian hanya bisa dilakukan ketika dalam kondisi saya tidak
-            mampu melanjutkan hasil kerja saya, dan klien hanya akan menerima
-            pengembalian biaya sebesar 50% dari total pembelian namun jika sudah
-            sampai tahap half rendering klien hanya mendapatkan pengembalian
-            sebesar 30%
-          </li>
-          <li>
-            Revisi yang merubah total atau sebagian besar hasil kerja akan
-            dikenakan setengah biaya dari harga pembelian (tidak dibayar full
-            hanya setengah saja, misalnya bust up IDR 60.000 namun terkena
-            revisi maka setelahnya hanya perlu membayar IDR 30.000, dan jika
-            revisinya merubah dari bust up ke half body (selama masih di anggap
-            sebagai revisi besar-besaran) hanya akan dikenakan biaya IDR 50.000)
-          </li>
-          <li>
-            Kesulitan pada proses menggambar bisa saja memakan waktu yang lebih
-            lama dan akan berpengaruh pada tambahan biaya sebesar 10% dari total
-            pembelian.
+          <li v-for="(value, index) in termsAndConditions" :key="index">
+            {{ value }}
           </li>
         </ul>
       </div>
@@ -53,12 +63,9 @@ useHead({
             <IconCheck class="md:order-1 bg-lime-500 rounded-full" />Do's
           </h6>
           <ul class="text-slate-300 md:text-right text-lg space-y-1 mt-2">
-            <li>Female</li>
-            <li>Original Character</li>
-            <li>Fanart</li>
-            <li>Detailed Character</li>
-            <li>Heavy Gore</li>
-            <li>Kemonomimi</li>
+            <li v-for="(value, index) in doList" :key="`${value}-${index}`">
+              {{ value }}
+            </li>
           </ul>
         </div>
         <div>
@@ -66,69 +73,27 @@ useHead({
             <IconClose class="bg-red-500 rounded-full p-1" />Don't
           </h6>
           <ul class="text-slate-300 text-lg space-y-1 mt-2">
-            <li>Male</li>
-            <li>Furry</li>
-            <li>NSFW</li>
-            <li>LGBT</li>
-            <li>Old People</li>
-            <li>Mecha</li>
+            <li v-for="(value, index) in dontList" :key="`${value}-${index}`">
+              {{ value }}
+            </li>
           </ul>
         </div>
       </div>
       <h1 class="text-center text-4xl mt-4">Price List</h1>
       <div class="bg-glass rounded-3xl p-8 w-96 md:w-[40rem] mt-4">
         <table class="text-slate-300 w-full [&_td]:p-2 [&_td]:border">
-          <tr>
-            <td>Bust up</td>
-            <td>IDR 60.000</td>
-          </tr>
-          <tr>
-            <td>Half body</td>
-            <td>IDR 100.000</td>
-          </tr>
-          <tr>
-            <td>Knee up</td>
-            <td>IDR 140.000</td>
-          </tr>
-          <tr>
-            <td>Full body</td>
-            <td>IDR 170.000</td>
-          </tr>
-          <tr>
-            <td>Character sheet*</td>
-            <td>IDR 220.000</td>
-          </tr>
-          <tr>
-            <td>Background</td>
-            <td>IDR 15.000 - IDR 100.000</td>
-          </tr>
-          <tr>
-            <td>Commercial purpose</td>
-            <td>2x</td>
-          </tr>
-          <tr>
-            <td>Couple</td>
-            <td>2x</td>
+          <tr v-for="(value, key, index) in priceList" :key="`${key}-${index}`">
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
           </tr>
         </table>
-        <p class="mt-2">
-          *<i
-            >Character sheet: Full body (front, back, side), aset tambahan
-            berupa detail karakter dan gratis 1 bust up.</i
-          >
-        </p>
+        <ul class="mt-2 text-slate-300">
+          <li v-for="(value, index) in clarificationList" :key="index">
+            *<i>{{ value }}</i>
+          </li>
+        </ul>
         <ul class="text-slate-300 mt-6 space-y-2 list-disc">
-          <li>Revisi dan simpel color background tidak akan dikenai biaya.</li>
-          <li>Semua sudah termasuk detailing dan fully rendered.</li>
-          <li>
-            Waktu pengerjaan bervariasi namun rata-rata bisa menghabiskan waktu
-            selama 5 hari - 1 bulan tergantung dari pesanan dan pengerjaannya.
-          </li>
-          <li>
-            Hasil akan dikirimkan melalui Google Drive, bisa dalam bentuk JPG
-            atau PNG, 350 DPI, Transparan atau background jika dengan latar
-            belakang.
-          </li>
+          <li v-for="(value, index) in noteList" :key="index">{{ value }}</li>
           <li>
             <ul class="space-y-2 md:space-y-0 md:flex gap-4">
               <span>Pembayaran melalui:</span>

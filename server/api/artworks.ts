@@ -1,3 +1,6 @@
+import fs from 'node:fs'
+import path from 'node:path'
+
 export default defineEventHandler(async (event) => {
   const page = parseInt(getQuery<{ page: string }>(event).page || '1')
   const limit = parseInt(getQuery<{ limit: string }>(event).limit || '4')
@@ -5,10 +8,18 @@ export default defineEventHandler(async (event) => {
   const startIndex = (page - 1) * limit
   const endIndex = page * limit
 
-  const data: string[] =
-    (await useStorage('assets:server').getItem(`data.json`)) || []
+  let files: string[] = []
 
-  const files = data.reverse()
+  if (process.env.NODE_ENV === 'development') {
+    const artworks = fs.readdirSync('./public/artworks')
+    files = artworks.reverse()
+  }
+
+  if (process.env.NODE_ENV === 'production') {
+    const output = path.join(process.cwd(), 'artworks.json')
+    const data: string[] = JSON.parse(fs.readFileSync(output, 'utf-8'))
+    files = data.reverse()
+  }
 
   const res = {
     total: files.length,

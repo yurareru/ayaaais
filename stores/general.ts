@@ -7,7 +7,7 @@ export const useGeneralStore = defineStore('general', () => {
   }
 
   const page = ref<number>(1)
-  const limit = ref<number>(8)
+  const limit = ref<number>(4)
   const artworks = ref<{
     2024: string[]
     2023: string[]
@@ -15,11 +15,14 @@ export const useGeneralStore = defineStore('general', () => {
     2024: [],
     2023: [],
   })
+
+  const isObserverActive = ref(true)
   return {
     name,
     setName,
     page,
     limit,
     artworks,
+    isObserverActive,
   }
 })

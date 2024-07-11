@@ -28,7 +28,6 @@ setTimeout(() => {
           :alt="`loading ${name}`"
           quality="50"
           placeholder="/assets/MaterialSymbolsImage.svg"
-          placeholder-class="animate-pulse"
         />
       </div>
     </TransitionGroup>

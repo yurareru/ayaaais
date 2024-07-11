@@ -25,7 +25,7 @@
     @apply text-slate-300;
   }
   .bg-glass {
-    @apply bg-black bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10;
+    @apply bg-black bg-clip-padding backdrop-blur-sm bg-opacity-10;
   }
   .btn {
     @apply px-4 py-2 rounded-full border border-slate-100 text-slate-100 hover:bg-rose-400 hover:border-rose-400 duration-200;

@@ -2,14 +2,16 @@
 useHead({
   title: 'My Artworks',
 })
-const { page, limit, artworks } = storeToRefs(useGeneralStore())
+const { page, limit, artworks, isObserverActive } = storeToRefs(
+  useGeneralStore()
+)
 
 const fetchArtworks = () => {
   $fetch(`/api/artworks?page=${page.value}&limit=${limit.value}`).then(
     (data: any) => {
       data.data.forEach((name: string) => {
-        if (name.includes('2024_')) artworks.value[2024].push(name)
-        if (name.includes('2023_')) artworks.value[2023].push(name)
+        if (name.startsWith('2024_')) artworks.value[2024].push(name)
+        if (name.startsWith('2023_')) artworks.value[2023].push(name)
 
         if (page.value > data.lastPage) isObserverActive.value = false
       })
@@ -17,11 +19,12 @@ const fetchArtworks = () => {
   )
 }
 
-fetchArtworks()
-page.value++
+if (isObserverActive.value) {
+  fetchArtworks()
+  page.value++
+}
 
 const target = ref<HTMLElement | null>(null)
-const isObserverActive = ref(true)
 
 useIntersectionObserver(target, ([{ isIntersecting }]: any) => {
   if (!isIntersecting || !isObserverActive.value) return
