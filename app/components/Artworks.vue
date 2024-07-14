@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const data = ref()
-//@ts-ignore
 const props = defineProps<{
   data: { path: string }
 }>()
@@ -13,7 +12,7 @@ setTimeout(() => {
   <div
     class="bg-glass rounded-3xl p-8 w-96 md:w-[40rem] lg:w-[60rem] xl:w-[76rem] mt-4 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
   >
-    <TransitionGroup name="pop" appear mode="out-in">
+    <TransitionGroup name="pop" appear>
       <div
         class="size-80 md:size-64 lg:size-64 overflow-hidden rounded-2xl cursor-pointer flex"
         v-for="(name, index) in data"

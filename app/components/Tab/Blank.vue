@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-//@ts-ignore
 const emit = defineEmits()
 const target = ref()
-useIntersectionObserver(target, ([{ isIntersecting }]: any) => {
+//@ts-ignore
+useIntersectionObserver(target, ([{ isIntersecting }]) => {
   if (!isIntersecting) return
   emit('isIntersecting')
 })

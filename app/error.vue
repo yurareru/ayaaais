@@ -8,7 +8,6 @@ interface NuxtError {
   cause?: unknown
 }
 
-//@ts-ignore
 const { error } = defineProps({
   error: Object as () => NuxtError,
 })

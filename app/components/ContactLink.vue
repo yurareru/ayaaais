@@ -1,5 +1,4 @@
 <script setup lang="ts">
-//@ts-ignore
 defineProps<{
   to: string
 }>()

@@ -7,26 +7,29 @@ const { page, limit, artworks, isObserverActive } = storeToRefs(
 )
 
 const fetchArtworks = () => {
-  $fetch(`/api/artworks?page=${page.value}&limit=${limit.value}`).then(
-    (data: any) => {
-      data.data.forEach((name: string) => {
-        if (name.startsWith('2024_')) artworks.value[2024].push(name)
-        if (name.startsWith('2023_')) artworks.value[2023].push(name)
+  $fetch('/api/artworks', {
+    query: { page: page.value, limit: limit.value },
+  }).then((res) => {
+    res.data.forEach((name: string) => {
+      if (name.startsWith('2024_')) artworks.value[2024].push(name)
+      if (name.startsWith('2023_')) artworks.value[2023].push(name)
 
-        if (page.value > data.lastPage) isObserverActive.value = false
-      })
-    }
-  )
+      if (page.value > res.lastPage) isObserverActive.value = false
+    })
+  })
 }
 
 if (isObserverActive.value) {
+  fetchArtworks()
+  page.value++
   fetchArtworks()
   page.value++
 }
 
 const target = ref<HTMLElement | null>(null)
 
-useIntersectionObserver(target, ([{ isIntersecting }]: any) => {
+//@ts-ignore
+useIntersectionObserver(target, ([{ isIntersecting }]) => {
   if (!isIntersecting || !isObserverActive.value) return
   fetchArtworks()
   page.value++

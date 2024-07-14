@@ -5,10 +5,9 @@
 .nitro
 .cache
 dist
-public/placeholders/*
 
 # Node dependencies
-node_modules
+node_modules*
 
 # Logs
 logs
