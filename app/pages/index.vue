@@ -106,58 +106,60 @@ const statuses = {
       </div>
     </div>
     <div class="min-h-screen relative snap-start pb-4" ref="elTab">
-      <nav
-        class="bg-glass p-2 text-slate-100 sticky top-0 z-10 flex items-center justify-between transition-all duration-500"
-        :style="`height: ${navbarHeight}px;`"
-      >
-        <div />
-
-        <ClientOnly>
-          <Transition name="fade">
-            <ul
-              v-if="showMenu || isMediumScreen"
-              class="text-center duration-300 md:space-y-0 items-center absolute left-1/2 -translate-x-1/2 w-max select-none"
-              :class="showMenu ? 'space-y-2' : 'flex'"
-            >
-              <li
-                class="px-4 py-2 cursor-pointer rounded-full"
-                @click="setTab(1)"
-                :class="tab === 1 ? 'bg-rose-400 border-rose-400' : ''"
+      <Transition name="slide-down" appear>
+        <nav
+          class="bg-glass p-2 text-slate-100 sticky md:fixed top-0 w-full z-10 flex items-center justify-between transition-all duration-500"
+          :style="`height: ${navbarHeight}px;`"
+          v-if="y >= height || !isMediumScreen"
+        >
+          <div />
+          <ClientOnly>
+            <Transition name="fade">
+              <ul
+                v-if="showMenu || isMediumScreen"
+                class="text-center duration-300 md:space-y-0 items-center absolute left-1/2 -translate-x-1/2 w-max select-none"
+                :class="showMenu ? 'space-y-2' : 'flex'"
               >
-                About
-              </li>
-              <li
-                class="px-4 py-2 cursor-pointer rounded-full"
-                @click="setTab(2)"
-                :class="tab === 2 ? 'bg-rose-400 border-rose-400' : ''"
-              >
-                Commission
-              </li>
-              <li
-                class="px-4 py-2 cursor-pointer rounded-full"
-                @click="setTab(3)"
-                :class="tab === 3 ? 'bg-rose-400 border-rose-400' : ''"
-              >
-                Artworks
-              </li>
-            </ul>
-          </Transition>
-        </ClientOnly>
-        <ClientOnly>
-          <IconMenu
-            @click="showMenu = true"
-            v-if="!showMenu && !isMediumScreen"
-            class="text-4xl text-slate-100 hover:text-slate-800 hover:bg-slate-100 p-2 rounded-full duration-200"
-          />
-          <IconClose
-            @click="showMenu = !showMenu"
-            v-if="showMenu && !isMediumScreen"
-            class="text-4xl text-slate-100 hover:text-slate-800 hover:bg-slate-100 p-2 rounded-full duration-200"
-          />
-        </ClientOnly>
-      </nav>
+                <li
+                  class="px-4 py-2 cursor-pointer rounded-full"
+                  @click="setTab(1)"
+                  :class="tab === 1 ? 'bg-rose-400 border-rose-400' : ''"
+                >
+                  About
+                </li>
+                <li
+                  class="px-4 py-2 cursor-pointer rounded-full"
+                  @click="setTab(2)"
+                  :class="tab === 2 ? 'bg-rose-400 border-rose-400' : ''"
+                >
+                  Commission
+                </li>
+                <li
+                  class="px-4 py-2 cursor-pointer rounded-full"
+                  @click="setTab(3)"
+                  :class="tab === 3 ? 'bg-rose-400 border-rose-400' : ''"
+                >
+                  Artworks
+                </li>
+              </ul>
+            </Transition>
+          </ClientOnly>
+          <ClientOnly>
+            <IconMenu
+              @click="showMenu = true"
+              v-if="!showMenu && !isMediumScreen"
+              class="text-4xl text-slate-100 hover:text-slate-800 hover:bg-slate-100 p-2 rounded-full duration-200"
+            />
+            <IconClose
+              @click="showMenu = !showMenu"
+              v-if="showMenu && !isMediumScreen"
+              class="text-4xl text-slate-100 hover:text-slate-800 hover:bg-slate-100 p-2 rounded-full duration-200"
+            />
+          </ClientOnly>
+        </nav>
+      </Transition>
       <div
-        class="flex items-center min-h-[calc(100vh-5rem)] my-4 flex-col overflow-hidden"
+        class="flex items-center min-h-[calc(100vh-5rem)] my-4 flex-col overflow-hidden md:pt-14"
       >
         <Transition
           :name="
@@ -241,5 +243,14 @@ const statuses = {
 .slide-enter-from,
 .slide-leave-to {
   transform: translateY(200%);
+}
+
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: all 0.3s ease;
+}
+.slide-down-enter-from,
+.slide-down-leave-to {
+  transform: translateY(-200%);
 }
 </style>

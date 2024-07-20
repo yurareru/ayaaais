@@ -1,7 +1,13 @@
 <template>
+  <NuxtImg
+    src="/assets/main.jpg"
+    class="object-cover h-screen w-screen fixed scale-110 -z-50"
+    format="webp"
+    loading="lazy"
+    preload
+  />
   <div
-    class="bg-main bg-center [border-image:fill_0_linear-gradient(to_bottom_right,#e11d4880,#a78bfa80)]"
-  >
-    <slot />
-  </div>
+    class="bg-gradient-to-br from-rose-600 to-violet-400 object-cover h-screen w-screen fixed opacity-50 -z-50"
+  />
+  <slot />
 </template>
