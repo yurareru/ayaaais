@@ -1,7 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { readdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
-import sharp from 'sharp'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -13,12 +12,20 @@ export default defineNuxtConfig({
       writeFileSync(output, data)
     },
   },
+
+  future: {
+    compatibilityVersion: 4,
+  },
+
+  compatibilityDate: '2024-07-04',
+
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxt/image',
     '@pinia/nuxt',
     '@vueuse/nuxt',
-    '@formkit/auto-animate/nuxt',
+    '@nuxt/fonts',
+    '@nuxt/icon',
   ],
 
   image: {
@@ -29,9 +36,7 @@ export default defineNuxtConfig({
     storesDirs: ['./stores/**'],
   },
 
-  future: {
-    compatibilityVersion: 4,
+  icon: {
+    mode: 'svg',
   },
-
-  compatibilityDate: '2024-07-04',
 })

@@ -40,7 +40,7 @@ const statuses = {
   <div class="overflow-y-scroll h-screen md:snap-y snap-mandatory" ref="body">
     <div class="flex justify-center items-center min-h-screen py-8 snap-start">
       <div class="bg-glass rounded-3xl p-8 w-96 md:w-[40rem]">
-        <div class="space-y-4 md:space-y-2" v-auto-animate>
+        <div class="space-y-4 md:space-y-2">
           <NuxtImg
             src="/assets/avatar.png"
             format="webp"
@@ -52,7 +52,8 @@ const statuses = {
           <h6
             class="tracking-widest flex items-center justify-center md:justify-normal"
           >
-            <IconBrush class="mr-1" />ILLUSTRATOR
+            <Icon name="material-symbols:brush" class="mr-1" />
+            ILLUSTRATOR
           </h6>
           <p class="max-w-96 break-words text-center md:text-left pb-4">
             Helloooowww and welcome (人´∀｀)｡ﾟ+
@@ -70,25 +71,25 @@ const statuses = {
         </div>
         <div class="flex items-center justify-center space-x-4 mt-4">
           <ContactLink to="https://x.com/Ayaa_Ais">
-            <IconX />
+            <Icon name="simple-icons:x" />
           </ContactLink>
           <ContactLink to="mailto:Ayaaais001@gmail.com">
-            <IconGmail />
+            <Icon name="simple-icons:gmail" />
           </ContactLink>
           <ContactLink to="https://www.patreon.com/AyaaAIs">
-            <IconPatreon />
+            <Icon name="simple-icons:patreon" />
           </ContactLink>
           <ContactLink to="https://www.pixiv.net/users/107317668">
-            <IconPixiv />
+            <Icon name="simple-icons:pixiv" />
           </ContactLink>
           <ContactLink to="https://www.facebook.com/AyaaaAiss">
-            <IconFacebook />
+            <Icon name="simple-icons:facebook" />
           </ContactLink>
           <ContactLink to="https://www.instagram.com/ayaa__ais">
-            <IconInstagram />
+            <Icon name="simple-icons:instagram" />
           </ContactLink>
           <ContactLink to="https://www.tiktok.com/@ayaa_ais">
-            <IconTiktok />
+            <Icon name="simple-icons:tiktok" />
           </ContactLink>
         </div>
         <div class="my-4 border border-slate-100" />
@@ -113,49 +114,47 @@ const statuses = {
           v-if="y >= height || !isMediumScreen"
         >
           <div />
-          <ClientOnly>
-            <Transition name="fade">
-              <ul
-                v-if="showMenu || isMediumScreen"
-                class="text-center duration-300 md:space-y-0 items-center absolute left-1/2 -translate-x-1/2 w-max select-none"
-                :class="showMenu ? 'space-y-2' : 'flex'"
+          <Transition name="fade">
+            <ul
+              v-if="showMenu || isMediumScreen"
+              class="text-center duration-300 md:space-y-0 items-center absolute left-1/2 -translate-x-1/2 w-max select-none"
+              :class="showMenu ? 'space-y-2' : 'flex'"
+            >
+              <li
+                class="px-4 py-2 cursor-pointer rounded-full"
+                @click="setTab(1)"
+                :class="tab === 1 ? 'bg-rose-400 border-rose-400' : ''"
               >
-                <li
-                  class="px-4 py-2 cursor-pointer rounded-full"
-                  @click="setTab(1)"
-                  :class="tab === 1 ? 'bg-rose-400 border-rose-400' : ''"
-                >
-                  About
-                </li>
-                <li
-                  class="px-4 py-2 cursor-pointer rounded-full"
-                  @click="setTab(2)"
-                  :class="tab === 2 ? 'bg-rose-400 border-rose-400' : ''"
-                >
-                  Commission
-                </li>
-                <li
-                  class="px-4 py-2 cursor-pointer rounded-full"
-                  @click="setTab(3)"
-                  :class="tab === 3 ? 'bg-rose-400 border-rose-400' : ''"
-                >
-                  Artworks
-                </li>
-              </ul>
-            </Transition>
-          </ClientOnly>
-          <ClientOnly>
-            <IconMenu
-              @click="showMenu = true"
-              v-if="!showMenu && !isMediumScreen"
-              class="text-4xl text-slate-100 hover:text-slate-800 hover:bg-slate-100 p-2 rounded-full duration-200"
-            />
-            <IconClose
-              @click="showMenu = !showMenu"
-              v-if="showMenu && !isMediumScreen"
-              class="text-4xl text-slate-100 hover:text-slate-800 hover:bg-slate-100 p-2 rounded-full duration-200"
-            />
-          </ClientOnly>
+                About
+              </li>
+              <li
+                class="px-4 py-2 cursor-pointer rounded-full"
+                @click="setTab(2)"
+                :class="tab === 2 ? 'bg-rose-400 border-rose-400' : ''"
+              >
+                Commission
+              </li>
+              <li
+                class="px-4 py-2 cursor-pointer rounded-full"
+                @click="setTab(3)"
+                :class="tab === 3 ? 'bg-rose-400 border-rose-400' : ''"
+              >
+                Artworks
+              </li>
+            </ul>
+          </Transition>
+          <Icon
+            name="material-symbols:menu-rounded"
+            @click="showMenu = true"
+            v-if="!showMenu && !isMediumScreen"
+            class="text-4xl text-slate-100 hover:text-slate-800 hover:bg-slate-100 p-2 rounded-full duration-200"
+          />
+          <Icon
+            name="material-symbols:close"
+            @click="showMenu = !showMenu"
+            v-if="showMenu && !isMediumScreen"
+            class="text-4xl text-slate-100 hover:text-slate-800 hover:bg-slate-100 p-2 rounded-full duration-200"
+          />
         </nav>
       </Transition>
       <div
@@ -188,7 +187,7 @@ const statuses = {
         @click="scrollToTop()"
         v-if="y > height / 4"
       >
-        <IconUp />
+        <Icon name="material-symbols:keyboard-arrow-up-rounded" />
       </div>
     </Transition>
   </div>

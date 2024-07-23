@@ -60,7 +60,10 @@ const noteList = [
       >
         <div>
           <h6 class="md:justify-end text-2xl flex items-center gap-2">
-            <IconCheck class="md:order-1 bg-lime-500 rounded-full" />Do's
+            <Icon
+              name="material-symbols:check"
+              class="md:order-1 bg-lime-500 rounded-full"
+            />Do's
           </h6>
           <ul class="text-slate-300 md:text-right text-lg space-y-1 mt-2">
             <li v-for="(value, index) in doList" :key="`${value}-${index}`">
@@ -70,7 +73,10 @@ const noteList = [
         </div>
         <div>
           <h6 class="text-2xl flex items-center gap-2">
-            <IconClose class="bg-red-500 rounded-full p-1" />Don't
+            <Icon
+              name="material-symbols:close"
+              class="bg-red-500 rounded-full p-1"
+            />Don't
           </h6>
           <ul class="text-slate-300 text-lg space-y-1 mt-2">
             <li v-for="(value, index) in dontList" :key="`${value}-${index}`">
