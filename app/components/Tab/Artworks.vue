@@ -28,7 +28,7 @@ if (isObserverActive.value) {
 
 const target = ref<HTMLElement | null>(null)
 
-//@ts-ignore
+// @ts-expect-error: Property 'isIntersecting' does not exist on type 'IntersectionObserverEntry | undefined'.ts-plugin(2339)
 useIntersectionObserver(target, ([{ isIntersecting }]) => {
   if (!isIntersecting || !isObserverActive.value) return
   fetchArtworks()
@@ -41,13 +41,13 @@ useIntersectionObserver(target, ([{ isIntersecting }]) => {
     <div>
       <div>
         <h1 class="text-center text-4xl mt-4">2024</h1>
-        <Artworks :data="artworks[2024]" />
+        <ArtworksList :artworks="artworks[2024]" />
       </div>
       <div v-if="artworks[2023].length > 0">
         <h1 class="text-center text-4xl mt-16">2023</h1>
-        <Artworks :data="artworks[2023]" />
+        <ArtworksList :artworks="artworks[2023]" />
       </div>
-      <div class="border -translate-y-16 invisible" ref="target" />
+      <div ref="target" class="border -translate-y-16 invisible" />
     </div>
   </div>
 </template>

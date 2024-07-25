@@ -1,15 +1,15 @@
 <script setup lang="ts">
-interface NuxtError {
-  statusCode: number
-  fatal: boolean
-  unhandled: boolean
-  statusMessage?: string
-  data?: unknown
-  cause?: unknown
-}
+import type { NuxtError } from '#app'
 
 const { error } = defineProps({
-  error: Object as () => NuxtError,
+  error: {
+    type: Object as () => NuxtError,
+    default: () => ({
+      statusCode: 500,
+      fatal: false,
+      unhandled: false,
+    }),
+  },
 })
 const text = ref('Redirecting')
 if (error?.statusCode == 404) {

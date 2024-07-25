@@ -4,13 +4,15 @@ const prevTab = ref(-1)
 const setTab = async (n: number) => {
   prevTab.value = tab.value
   tab.value = n
+  if (tab.value === prevTab.value) return (showMenu.value = false)
   await nextTick()
   scrollToElTab()
   showMenu.value = false
 }
 const scrollToTop = () => (y.value = 0)
 const elTab = ref<HTMLElement | null>(null)
-const scrollToElTab = () => elTab.value?.scrollIntoView({ behavior: 'smooth' })
+const scrollToElTab = () =>
+  elTab.value?.scrollIntoView({ block: 'start', behavior: 'smooth' })
 
 const { name } = storeToRefs(useGeneralStore())
 
@@ -37,7 +39,7 @@ const statuses = {
 }
 </script>
 <template>
-  <div class="overflow-y-scroll h-screen md:snap-y snap-mandatory" ref="body">
+  <div ref="body" class="overflow-y-scroll h-screen md:snap-y snap-mandatory">
     <div class="flex justify-center items-center min-h-screen py-8 snap-start">
       <div class="bg-glass rounded-3xl p-8 w-96 md:w-[40rem]">
         <div class="space-y-4 md:space-y-2">
@@ -61,7 +63,7 @@ const statuses = {
           <div
             class="flex flex-col md:flex-row md:space-x-2 items-center justify-center space-y-4 md:space-y-0"
           >
-            <Status
+            <StatusItem
               v-for="(value, label, index) in statuses"
               :key="`${label}-${index}`"
               :label="label"
@@ -97,21 +99,22 @@ const statuses = {
           class="flex flex-col space-y-4 md:space-y-0 md:flex-row md:justify-center space-x-2"
         >
           <button
-            @click="setTab(2)"
             class="btn"
             :class="tab === 2 ? 'bg-rose-400 border-rose-400' : ''"
+            @click="setTab(2)"
           >
             Commission Info
           </button>
         </div>
       </div>
     </div>
-    <div class="min-h-screen relative snap-start pb-4" ref="elTab">
+    <div ref="elTab" class="min-h-screen relative snap-start pb-4">
       <Transition name="slide-down" appear>
         <nav
-          class="bg-glass p-2 text-slate-100 sticky md:fixed top-0 w-full z-10 flex items-center justify-between transition-all duration-500"
+          v-if="(y >= height && height !== Infinity) || !isMediumScreen"
+          class="bg-glass p-2 text-slate-100 sticky md:fixed top-0 w-full z-10 flex items-center justify-between transition-all duration-500 overflow-hidden"
           :style="`height: ${navbarHeight}px;`"
-          v-if="y >= height || !isMediumScreen"
+          :class="y >= height && height !== Infinity ? '' : 'md:hidden'"
         >
           <div />
           <Transition name="fade">
@@ -122,43 +125,43 @@ const statuses = {
             >
               <li
                 class="px-4 py-2 cursor-pointer rounded-full"
-                @click="setTab(1)"
                 :class="tab === 1 ? 'bg-rose-400 border-rose-400' : ''"
+                @click="setTab(1)"
               >
                 About
               </li>
               <li
                 class="px-4 py-2 cursor-pointer rounded-full"
-                @click="setTab(2)"
                 :class="tab === 2 ? 'bg-rose-400 border-rose-400' : ''"
+                @click="setTab(2)"
               >
                 Commission
               </li>
               <li
                 class="px-4 py-2 cursor-pointer rounded-full"
-                @click="setTab(3)"
                 :class="tab === 3 ? 'bg-rose-400 border-rose-400' : ''"
+                @click="setTab(3)"
               >
                 Artworks
               </li>
             </ul>
           </Transition>
           <Icon
-            name="material-symbols:menu-rounded"
-            @click="showMenu = true"
             v-if="!showMenu && !isMediumScreen"
+            name="material-symbols:menu-rounded"
             class="text-4xl text-slate-100 hover:text-slate-800 hover:bg-slate-100 p-2 rounded-full duration-200"
+            @click="showMenu = true"
           />
           <Icon
-            name="material-symbols:close"
-            @click="showMenu = !showMenu"
             v-if="showMenu && !isMediumScreen"
+            name="material-symbols:close"
             class="text-4xl text-slate-100 hover:text-slate-800 hover:bg-slate-100 p-2 rounded-full duration-200"
+            @click="showMenu = !showMenu"
           />
         </nav>
       </Transition>
       <div
-        class="flex items-center min-h-[calc(100vh-5rem)] my-4 flex-col overflow-hidden md:pt-14"
+        class="flex items-center min-h-[calc(100vh-5rem)] flex-col overflow-hidden md:pt-14"
       >
         <Transition
           :name="
@@ -183,9 +186,9 @@ const statuses = {
     </Transition>
     <Transition name="slide" appear>
       <div
+        v-if="y > height / 4"
         class="fixed bottom-4 right-4 p-4 text-4xl z-50 rounded-full text-slate-100 cursor-pointer bg-glass hover:text-rose-400 duration-500"
         @click="scrollToTop()"
-        v-if="y > height / 4"
       >
         <Icon name="material-symbols:keyboard-arrow-up-rounded" />
       </div>

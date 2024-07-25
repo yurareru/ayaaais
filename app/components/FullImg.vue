@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 const { name } = storeToRefs(useGeneralStore())
 const { setName } = useGeneralStore()
-const img = useImage()
 const background = ref()
 const preventScroll = (e: Event) => {
   e.preventDefault()
@@ -16,8 +15,8 @@ useEventListener(document.body, 'keydown', () => setName())
 <template>
   <div
     v-if="name"
-    class="fixed z-50 top-1/2 -translate-y-1/2 bg-glass h-screen w-screen"
     ref="background"
+    class="fixed z-50 top-1/2 -translate-y-1/2 bg-glass h-screen w-screen"
   >
     <NuxtImg
       :src="`/artworks/${name}`"

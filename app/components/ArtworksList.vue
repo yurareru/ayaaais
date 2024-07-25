@@ -1,11 +1,11 @@
 <script setup lang="ts">
 const data = ref()
 const props = defineProps<{
-  data: { path: string }
+  artworks: { path: string }
 }>()
 const { setName } = useGeneralStore()
 setTimeout(() => {
-  data.value = props.data
+  data.value = props.artworks
 }, 500)
 </script>
 <template>
@@ -14,9 +14,9 @@ setTimeout(() => {
   >
     <TransitionGroup name="pop" appear>
       <div
-        class="size-80 md:size-64 lg:size-64 overflow-hidden rounded-2xl cursor-pointer flex"
         v-for="(name, index) in data"
         :key="`${name}-${index}`"
+        class="size-80 md:size-64 lg:size-64 overflow-hidden rounded-2xl cursor-pointer flex"
         @click="setName(name)"
       >
         <NuxtImg
