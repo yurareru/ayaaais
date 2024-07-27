@@ -41,11 +41,11 @@ useIntersectionObserver(target, ([{ isIntersecting }]) => {
     <div>
       <div>
         <h1 class="text-center text-4xl mt-4">2024</h1>
-        <ArtworksList :artworks="artworks[2024]" />
+        <ArtworksList :data="artworks[2024]" />
       </div>
       <div v-if="artworks[2023].length > 0">
         <h1 class="text-center text-4xl mt-16">2023</h1>
-        <ArtworksList :artworks="artworks[2023]" />
+        <ArtworksList :data="artworks[2023]" />
       </div>
       <div ref="target" class="border -translate-y-16 invisible" />
     </div>

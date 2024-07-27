@@ -1,11 +1,12 @@
 <script setup lang="ts">
-const data = ref()
 const props = defineProps<{
-  artworks: { path: string }
+  data: string[]
 }>()
 const { setName } = useGeneralStore()
+
+const _data = ref()
 setTimeout(() => {
-  data.value = props.artworks
+  _data.value = props.data
 }, 500)
 </script>
 <template>
@@ -14,7 +15,7 @@ setTimeout(() => {
   >
     <TransitionGroup name="pop" appear>
       <div
-        v-for="(name, index) in data"
+        v-for="(name, index) in _data"
         :key="`${name}-${index}`"
         class="size-80 md:size-64 lg:size-64 overflow-hidden rounded-2xl cursor-pointer flex"
         @click="setName(name)"
