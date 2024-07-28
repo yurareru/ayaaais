@@ -17,7 +17,7 @@
   h1 {
     @apply text-6xl font-semibold font-outfit text-slate-100;
   }
-  h6 {
+  h2 {
     @apply font-bold font-outfit text-slate-200;
   }
   p {

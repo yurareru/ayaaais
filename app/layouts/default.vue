@@ -6,6 +6,7 @@
       format="webp"
       loading="lazy"
       preload
+      alt="background image"
     />
     <div
       class="bg-gradient-to-br from-rose-600 to-violet-400 object-cover h-screen w-screen fixed opacity-50 -z-50"

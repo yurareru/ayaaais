@@ -23,7 +23,7 @@ setTimeout(() => {
         <NuxtImg
           :src="`/artworks/${name}`"
           format="webp"
-          width="320px"
+          width="256 md:320"
           class="duration-500 hover:scale-105 hover:-rotate-3 flex-grow text-white flex justify-center items-center w-full h-full object-cover"
           :alt="`loading ${name}`"
           quality="50"

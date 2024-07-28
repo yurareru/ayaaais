@@ -49,14 +49,15 @@ const statuses = {
             width="144"
             class="border-[5px] border-dashed rounded-full border-slate-100 mx-auto md:mx-0"
             preload
+            alt="avatar"
           />
           <h1 class="text-center md:text-left">Ayaa AIs</h1>
-          <h6
+          <h2
             class="tracking-widest flex items-center justify-center md:justify-normal"
           >
             <Icon name="material-symbols:brush" class="mr-1" />
             ILLUSTRATOR
-          </h6>
+          </h2>
           <p class="max-w-96 break-words text-center md:text-left pb-4">
             Helloooowww and welcome (人´∀｀)｡ﾟ+
           </p>

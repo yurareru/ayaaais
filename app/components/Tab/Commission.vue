@@ -47,7 +47,7 @@ const noteList = [
   <div class="min-h-screen">
     <div>
       <h1 class="text-center underline">Commission</h1>
-      <h6 class="text-center font-normal">Please read carefully</h6>
+      <h2 class="text-center font-normal">Please read carefully</h2>
       <div class="bg-glass rounded-3xl p-8 w-96 md:w-[40rem] mt-4">
         <ul class="text-slate-300 list-disc">
           <li v-for="(value, index) in termsAndConditions" :key="index">
@@ -59,12 +59,12 @@ const noteList = [
         class="bg-glass rounded-3xl p-8 w-96 md:w-[40rem] mt-4 md:grid space-y-8 md:space-y-0 grid-cols-2 gap-8 [&_ul]:list-disc md:[&_ul]:list-none"
       >
         <div>
-          <h6 class="md:justify-end text-2xl flex items-center gap-2">
+          <h2 class="md:justify-end text-2xl flex items-center gap-2">
             <Icon
               name="material-symbols:check"
               class="md:order-1 bg-lime-500 rounded-full"
             />Do's
-          </h6>
+          </h2>
           <ul class="text-slate-300 md:text-right text-lg space-y-1 mt-2">
             <li v-for="(value, index) in doList" :key="`${value}-${index}`">
               {{ value }}
@@ -72,12 +72,12 @@ const noteList = [
           </ul>
         </div>
         <div>
-          <h6 class="text-2xl flex items-center gap-2">
+          <h2 class="text-2xl flex items-center gap-2">
             <Icon
               name="material-symbols:close"
               class="bg-red-500 rounded-full p-1"
             />Don't
-          </h6>
+          </h2>
           <ul class="text-slate-300 text-lg space-y-1 mt-2">
             <li v-for="(value, index) in dontList" :key="`${value}-${index}`">
               {{ value }}
@@ -102,12 +102,13 @@ const noteList = [
           <li v-for="(value, index) in noteList" :key="index">{{ value }}</li>
           <li>
             <ul class="space-y-2 md:space-y-0 md:flex gap-4">
-              <span>Pembayaran melalui:</span>
+              <li>Pembayaran melalui:</li>
               <li class="flex items-center">
                 <NuxtImg
                   src="/assets/BRI.png"
                   alt="BRI Logo"
-                  class="mr-2 w-6 h-6"
+                  class="mr-2 w-6"
+                  width="24"
                 />
                 <span class="text-[#00529c] font-bold">BRI</span>
               </li>
@@ -115,7 +116,8 @@ const noteList = [
                 <NuxtImg
                   src="/assets/DANA.png"
                   alt="DANA Logo"
-                  class="mr-2 w-6 h-6"
+                  class="mr-2 w-6"
+                  width="24"
                 />
                 <span class="text-[#118ee9] font-bold">DANA</span>
               </li>
@@ -123,7 +125,8 @@ const noteList = [
                 <NuxtImg
                   src="/assets/ShopeePay.png"
                   alt="ShopeePay Logo"
-                  class="mr-2 w-6 h-6"
+                  class="mr-2 w-6"
+                  width="24"
                 />
                 <span class="text-[#ee4d2d] font-bold">ShopeePay</span>
               </li>
@@ -131,7 +134,8 @@ const noteList = [
                 <NuxtImg
                   src="/assets/gopay.png"
                   alt="GoPay Logo"
-                  class="mr-2 w-6 h-6"
+                  class="mr-2 w-6"
+                  width="24"
                 />
                 <span class="text-[#00aed6] font-bold">GoPay</span>
               </li>
