@@ -4,7 +4,7 @@ This repository contains the source code and assets for [Aya's portfolio website
 
 Made with :green_heart: for [Aya](https://www.instagram.com/ayaa__ais) using [Nuxt](https://nuxt.com/) + [Vue.js](https://vuejs.org/) and [Tailwind CSS](https://tailwindcss.com/).
 
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Fayaaais.vercel.app%2F)](https://ayaaais.vercel.app/)
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fayaaais.vercel.app%2F&style=for-the-badge)](https://ayaaais.vercel.app/)
 
 ## Table of Contents
 
@@ -37,7 +37,7 @@ pnpm install
 Start the development server on `http://localhost:3000`:
 
 ```bash
-pnpm run dev
+pnpm dev
 ```
 
 ## License
