@@ -11,7 +11,10 @@ export default defineNuxtPlugin(() => {
     comment('Thank you for visiting and using DOM Inspector'),
     comment(''),
     comment('Made with <3 for Aya'),
+    // comment('I Love Ayaaa'),
     comment('Built using Nuxt + Vue.js and Tailwind CSS'),
+    comment(''),
+    comment('Source code: https://github.com/yuuraeru/ayaaais'),
     comment('')
   )
 })

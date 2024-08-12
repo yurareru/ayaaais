@@ -49,5 +49,14 @@ useIntersectionObserver(target, ([{ isIntersecting }]) => {
       </div>
       <div ref="target" class="border -translate-y-16 invisible" />
     </div>
+    <p class="mt-4 text-center flex flex-col md:flex-row justify-center">
+      All artworks are licensed under
+      <a
+        class="underline md:ml-1"
+        target="_blank"
+        href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
+        >CC BY-NC-ND 4.0</a
+      >
+    </p>
   </div>
 </template>
