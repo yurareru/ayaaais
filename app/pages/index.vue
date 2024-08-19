@@ -35,7 +35,7 @@ const { y } = useScroll(body, { behavior: 'smooth' })
 const statuses = {
   'Art Trade': false,
   Collab: false,
-  Commission: true,
+  Commission: false,
 }
 </script>
 <template>
