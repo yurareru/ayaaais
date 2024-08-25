@@ -14,7 +14,7 @@ export default defineNuxtPlugin(() => {
     // comment('I Love Ayaaa'),
     comment('Built using Nuxt + Vue.js and Tailwind CSS'),
     comment(''),
-    comment('Source code: https://github.com/yuuraeru/ayaaais'),
+    comment('Source code: https://github.com/yurareru/ayaaais'),
     comment('')
   )
 })
