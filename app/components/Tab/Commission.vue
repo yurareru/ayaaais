@@ -21,27 +21,37 @@ const doList = [
   'Kemonomimi',
 ]
 
-const dontList = ['Male', 'Furry', 'NSFW', 'LGBT', 'Old People', 'Mecha']
+const dontList = [
+  'Male',
+  'Furry',
+  'NSFW',
+  'LGBT',
+  'Old People',
+  'Mecha'
+]
+
 const priceList = {
+  'Head shot': 'IDR 40.000',
   'Bust up': 'IDR 60.000',
   'Half body': 'IDR 100.000',
   'Knee up': 'IDR 140.000',
   'Full body': 'IDR 170.000',
   'Character sheet*': 'IDR 220.000',
-  Background: 'IDR 15.000 - IDR 100.000',
+  'Background': 'IDR 15.000 - IDR 100.000',
   'Commercial purpose': '2x',
-  Couple: '2x',
+  'Couple': '2x',
 }
 const clarificationList = [
-  'Character sheet: Full body (front, back, side), aset tambahan berupa detail karakter dan gratis 1 bust up.',
+  'Character sheet: Full body (front, back), aset tambahan berupa detail karakter.',
 ]
 
 const noteList = [
   'Revisi dan simpel color background tidak akan dikenai biaya.',
   'Semua sudah termasuk detailing dan fully rendered.',
   'Waktu pengerjaan bervariasi namun rata-rata bisa menghabiskan waktu selama 5 hari - 1 bulan tergantung dari pesanan dan pengerjaannya.',
-  'Hasil akan dikirimkan melalui Google Drive, bisa dalam bentuk JPG atau PNG, 350 DPI, Transparan atau background jika dengan latar belakang.',
+  'Hasil akan dikirimkan melalui Google Drive dalam PNG.',
 ]
+
 </script>
 <template>
   <div class="min-h-screen">
