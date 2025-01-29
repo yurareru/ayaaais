@@ -11,6 +11,7 @@ const fetchArtworks = () => {
     query: { page: page.value, limit: limit.value },
   }).then((res) => {
     res.data.forEach((name: string) => {
+      if (name.startsWith('2025_')) artworks.value[2025].push(name)
       if (name.startsWith('2024_')) artworks.value[2024].push(name)
       if (name.startsWith('2023_')) artworks.value[2023].push(name)
 
@@ -39,6 +40,10 @@ useIntersectionObserver(target, ([{ isIntersecting }]) => {
   <div class="min-h-screen">
     <h1 class="text-center underline">Artworks</h1>
     <div>
+      <div>
+        <h1 class="text-center text-4xl mt-4">2025</h1>
+        <ArtworksList :data="artworks[2025]" />
+      </div>
       <div>
         <h1 class="text-center text-4xl mt-4">2024</h1>
         <ArtworksList :data="artworks[2024]" />

@@ -9,9 +9,11 @@ export const useGeneralStore = defineStore('general', () => {
   const page = ref<number>(1)
   const limit = ref<number>(4)
   const artworks = ref<{
+    2025: string[]
     2024: string[]
     2023: string[]
   }>({
+    2025: [],
     2024: [],
     2023: [],
   })
