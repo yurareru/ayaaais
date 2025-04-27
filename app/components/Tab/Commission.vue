@@ -31,13 +31,13 @@ const dontList = [
 ]
 
 const priceList = {
-  'Head shot': 'IDR 40.000',
-  'Bust up': 'IDR 60.000',
-  'Half body': 'IDR 100.000',
-  'Knee up': 'IDR 140.000',
-  'Full body': 'IDR 170.000',
-  'Character sheet*': 'IDR 220.000',
-  'Background': 'IDR 15.000 - IDR 100.000',
+  'Head shot': 'IDR 80.000',
+  'Bust up': 'IDR 120.000',
+  'Half body': 'IDR 160.000',
+  'Knee up': 'IDR 200.000',
+  'Full body': 'IDR 240.000',
+  'Character sheet*': 'IDR 350.000',
+  'Background': 'IDR 0 – IDR 100.000',
   'Commercial purpose': '2x',
   'Couple': '2x',
 }
